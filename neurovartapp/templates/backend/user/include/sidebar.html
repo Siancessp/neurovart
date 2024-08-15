@@ -1,0 +1,114 @@
+<aside class="sidebar sidebar-default navs-rounded ">
+    <div class="sidebar-header d-flex align-items-center justify-content-start">
+        <a href="{% url 'index' %}" class="navbar-brand dis-none align-items-center">
+            <img src="/static/frontend/images/logo.png" class="img-fluid" style="width:60px;" alt="logo">            <h4
+                class="logo-title m-0"> Admin</h4>
+        </a>
+        <div class="sidebar-toggle" data-toggle="sidebar" data-active="true">
+            <i class="icon">
+                <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4.25 12.2744L19.25 12.2744" stroke="currentColor" stroke-width="1.5"></path>
+                    <path d="M10.2998 18.2988L4.2498 12.2748L10.2998 6.24976" stroke="currentColor"
+                          stroke-width="1.5"></path>
+                </svg>
+            </i>
+        </div>
+    </div>
+    <div class="sidebar-body p-0 data-scrollbar">
+        <div class="navbar-collapse pe-3" id="sidebar">
+            <ul class="navbar-nav iq-main-menu">
+                <li class="nav-item ">
+                    <a class="nav-link {% if request.path == '/super/dashboard' %}active{% endif %}" aria-current="page" href="{% url 'admindashboard' %}">
+                        <i class="icon">
+                            <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                        d="M9.14373 20.7821V17.7152C9.14372 16.9381 9.77567 16.3067 10.5584 16.3018H13.4326C14.2189 16.3018 14.8563 16.9346 14.8563 17.7152V20.7732C14.8562 21.4473 15.404 21.9951 16.0829 22H18.0438C18.9596 22.0023 19.8388 21.6428 20.4872 21.0007C21.1356 20.3586 21.5 19.4868 21.5 18.5775V9.86585C21.5 9.13139 21.1721 8.43471 20.6046 7.9635L13.943 2.67427C12.7785 1.74912 11.1154 1.77901 9.98539 2.74538L3.46701 7.9635C2.87274 8.42082 2.51755 9.11956 2.5 9.86585V18.5686C2.5 20.4637 4.04738 22 5.95617 22H7.87229C8.19917 22.0023 8.51349 21.8751 8.74547 21.6464C8.97746 21.4178 9.10793 21.1067 9.10792 20.7821H9.14373Z"
+                                        fill="currentColor"></path>
+                            </svg>
+                        </i>
+                        <span class="item-name">Dashboard</span>
+                    </a>
+                </li>
+
+
+
+
+
+
+
+
+
+
+
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-sponsor" role="button" aria-expanded="false" aria-controls="sidebar-sponsors">
+                        <i class="icon">
+                                <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M11.997 15.1746C7.684 15.1746 4 15.8546 4 18.5746C4 21.2956 7.661 21.9996 11.997 21.9996C16.31 21.9996 19.994 21.3206 19.994 18.5996C19.994 15.8786 16.334 15.1746 11.997 15.1746Z" fill="currentColor"></path>
+                                    <path opacity="0.4" d="M11.9971 12.5838C14.9351 12.5838 17.2891 10.2288 17.2891 7.29176C17.2891 4.35476 14.9351 1.99976 11.9971 1.99976C9.06008 1.99976 6.70508 4.35476 6.70508 7.29176C6.70508 10.2288 9.06008 12.5838 11.9971 12.5838Z" fill="currentColor"></path>
+                                </svg>
+                            </i>
+                        <span class="item-name">Users</span>
+                        <i class="right-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </i>
+                    </a>
+                    <ul class="sub-nav collapse" id="sidebar-sponsor" data-bs-parent="#sidebar">
+                        <li class="nav-item">
+                            <a class="nav-link " href="userList">
+                                <i class="icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" stroke-width="1.5" width="16" viewBox="0 0 24 24" fill="none">
+                                        <circle cx="12" cy="12" r="7.5" stroke="currentColor"></circle>
+                                    </svg>
+                                </i>
+                                <i class="sidenav-mini-icon"> A </i>
+                                <span class="item-name"> Manage Users List</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+ 
+
+
+<li class="nav-item">
+                        <a class="nav-link collapsed" data-bs-toggle="collapse" href="#sidebar-widget" role="button" aria-expanded="false" aria-controls="sidebar-widget">
+                            <i class="icon">
+                                <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path opacity="0.4" d="M21.25 13.4764C20.429 13.4764 19.761 12.8145 19.761 12.001C19.761 11.1865 20.429 10.5246 21.25 10.5246C21.449 10.5246 21.64 10.4463 21.78 10.3076C21.921 10.1679 22 9.97864 22 9.78146L21.999 7.10415C21.999 4.84102 20.14 3 17.856 3H6.144C3.86 3 2.001 4.84102 2.001 7.10415L2 9.86766C2 10.0648 2.079 10.2541 2.22 10.3938C2.36 10.5325 2.551 10.6108 2.75 10.6108C3.599 10.6108 4.239 11.2083 4.239 12.001C4.239 12.8145 3.571 13.4764 2.75 13.4764C2.336 13.4764 2 13.8093 2 14.2195V16.8949C2 19.158 3.858 21 6.143 21H17.857C20.142 21 22 19.158 22 16.8949V14.2195C22 13.8093 21.664 13.4764 21.25 13.4764Z" fill="currentColor"></path>
+                                    <path d="M15.4303 11.5887L14.2513 12.7367L14.5303 14.3597C14.5783 14.6407 14.4653 14.9177 14.2343 15.0837C14.0053 15.2517 13.7063 15.2727 13.4543 15.1387L11.9993 14.3737L10.5413 15.1397C10.4333 15.1967 10.3153 15.2267 10.1983 15.2267C10.0453 15.2267 9.89434 15.1787 9.76434 15.0847C9.53434 14.9177 9.42134 14.6407 9.46934 14.3597L9.74734 12.7367L8.56834 11.5887C8.36434 11.3907 8.29334 11.0997 8.38134 10.8287C8.47034 10.5587 8.70034 10.3667 8.98134 10.3267L10.6073 10.0897L11.3363 8.61268C11.4633 8.35868 11.7173 8.20068 11.9993 8.20068H12.0013C12.2843 8.20168 12.5383 8.35968 12.6633 8.61368L13.3923 10.0897L15.0213 10.3277C15.2993 10.3667 15.5293 10.5587 15.6173 10.8287C15.7063 11.0997 15.6353 11.3907 15.4303 11.5887Z" fill="currentColor"></path>
+                                </svg>
+                            </i>
+                            <span class="item-name">Payout List</span>
+                            <i class="right-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </i>
+                        </a>
+                        <ul class="sub-nav collapse" id="sidebar-widget" data-bs-parent="#sidebar" style="">
+                            <li class="nav-item">
+                                <a class="nav-link " href="payout_list">
+                                    <i class="icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" stroke-width="1.5" width="16" viewBox="0 0 24 24" fill="none">
+                                            <circle cx="12" cy="12" r="7.5" stroke="currentColor"></circle>
+                                        </svg>
+                                    </i>
+                                    <i class="sidenav-mini-icon"> W </i>
+                                    <span class="item-name">Manage Payout List</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+
+
+
+
+
+            </ul>
+        </div>
+    </div>
+</aside>

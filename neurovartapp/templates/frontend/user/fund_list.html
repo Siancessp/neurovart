@@ -1,0 +1,128 @@
+<!-- templates/traders_list.html -->
+{% include 'frontend/include/header.html' %}
+<!--   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<style>
+    .loginForm {
+        margin-top: 150px;
+        padding: 45px;
+        border: 1px solid #ccc;
+    }
+    form input, button {
+        border-radius: 50px !important;
+    }
+    .alert-error {
+        padding: 0;
+        color: red;
+    }
+    .card-title {
+        font-size: 1.5rem;
+        color: black;
+
+    }
+    .card-new{
+            color: black;
+
+    }
+
+    .card-text {
+        font-size: 1.2rem;
+    }
+    .card {
+        margin-bottom: 30px;
+    }
+    .card-body {
+        padding: 20px;
+    }
+</style>
+<!-- Main Content -->
+<div class="main-content">
+    <div class="container text-center">
+        <div class="row align-items-start">
+            <div class="col-md-12 col-sm-12">
+                <div class="iq-login">
+                    <div class="loginForm">
+                        <h2>Traders</h2>
+                        <div class="row">
+                            {% for application in fund_applications %}
+                            <div class="col-md-4">
+                                <div class="card mb-4 shadow-sm">
+                                    <img class="card-img-top" src="https://media.istockphoto.com/id/1471999877/photo/man-hand-on-laptop-with-exclamation-mark-on-virtual-screen-online-safety-warning-caution.jpg?s=1024x1024&w=is&k=20&c=GJBFTIaUU2JpqJR2rZebE4q54Nxvf-qFlIGFIoPaUZc=" alt="Trader image">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ application.full_name }}</h5>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.
+
+</p>
+                                        <a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#detailsModal" data-fullname="{{ application.full_name }}" data-countrycode="{{ application.country_code }}" data-whatsappno="{{ application.whatsapp_no }}" data-email="{{ application.email }}" data-residentialaddress="{{ application.residential_address }}" data-investmentamount="{{ application.investment_amount }}" data-commissionpercentage="{{ application.commission_percentage }}" data-riskratio="{{ application.risk_ratio }}" data-idupload="{{ application.id_upload.url }}" data-performancelink="{{ application.performance_link }}" data-terms="{{ application.terms }}">View Details</a> <a href="{% url 'set_investment_session' application.cus_id %}" class="btn btn-sm btn-success">Invest</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade card-new" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailsModalLabel">Trader Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Full Name:</strong> <span id="modalFullName"></span></p>
+                <p><strong>Country Code:</strong> <span id="modalCountryCode"></span></p>
+                <p><strong>WhatsApp No:</strong> <span id="modalWhatsAppNo"></span></p>
+                <p><strong>Email:</strong> <span id="modalEmail"></span></p>
+                <p><strong>Residential Address:</strong> <span id="modalResidentialAddress"></span></p>
+                <p><strong>Investment Amount:</strong> <span id="modalInvestmentAmount"></span></p>
+                <p><strong>Commission Percentage:</strong> <span id="modalCommissionPercentage"></span></p>
+                <p><strong>Risk Ratio:</strong> <span id="modalRiskRatio"></span></p>
+                <p><strong>ID Upload:</strong> <a id="modalIDUpload" href="#" target="_blank">View ID</a></p>
+                <p><strong>Performance Link:</strong> <a id="modalPerformanceLink" href="#" target="_blank">View Performance</a></p>
+                <p><strong>Terms Accepted:</strong> <span id="modalTerms"></span></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('#detailsModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var fullName = button.data('fullname');
+        var countryCode = button.data('countrycode');
+        var whatsappNo = button.data('whatsappno');
+        var email = button.data('email');
+        var residentialAddress = button.data('residentialaddress');
+        var investmentAmount = button.data('investmentamount');
+        var commissionPercentage = button.data('commissionpercentage');
+        var riskRatio = button.data('riskratio');
+        var idUpload = button.data('idupload');
+        var performanceLink = button.data('performancelink');
+        var terms = button.data('terms') ? 'Yes' : 'No';
+
+        var modal = $(this);
+        modal.find('#modalFullName').text(fullName);
+        modal.find('#modalCountryCode').text(countryCode);
+        modal.find('#modalWhatsAppNo').text(whatsappNo);
+        modal.find('#modalEmail').text(email);
+        modal.find('#modalResidentialAddress').text(residentialAddress);
+        modal.find('#modalInvestmentAmount').text(investmentAmount);
+        modal.find('#modalCommissionPercentage').text(commissionPercentage);
+        modal.find('#modalRiskRatio').text(riskRatio);
+        modal.find('#modalIDUpload').attr('href', idUpload);
+        modal.find('#modalPerformanceLink').attr('href', performanceLink);
+        modal.find('#modalTerms').text(terms);
+    });
+</script>
+<!-- Main Content End -->
+{% include 'frontend/include/footer.html' %}

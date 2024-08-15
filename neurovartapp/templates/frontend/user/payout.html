@@ -1,0 +1,77 @@
+{% extends 'frontend/user/layout/app.html' %}
+{% block title %} {{ APP_NAME }} | Wallet {% endblock %}
+{% block style %}
+<style>
+    #datatable_length, #datatable_info{display: none;}
+    #datatable_filter input{border: 1px solid #dda30a;}
+</style>
+{% endblock %}
+{% block content %}
+<div class="col-sm-12 col-lg-12">
+    <div class="card">
+        <div class="card-header d-flex justify-content-between">
+            <div class="header-title">
+                <h4 class="card-title">Payout Requests</h4>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="datatable" border="1" class="table table-striped iq-table1" data-toggle="data-table">
+   <thead>
+      <tr>
+         <th>SL No.</th>
+         <th>Request Amount</th>
+         <th>Service Charge</th>
+         <th>Charge Amount</th>
+         <th>Final Amount</th>
+         <th>Status</th>
+         <th>Remarks</th>
+         <th>Admin Remarks</th>
+         <th>Date</th>
+      </tr>
+   </thead>
+   <tbody>
+        {% if payout %}
+            {% for transaction in payout %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ transaction.request_amount }}</td>
+                <td>{{ transaction.service_charge }}</td>
+                <td>{{ transaction.charge_amount }}</td>
+                <td>{{ transaction.final_amount }}</td>
+                <td>{{ transaction.status }}</td>
+                <td>{{ transaction.remarks|default:"N/A" }}</td>
+                <td>{{ transaction.admin_remarks|default:"N/A" }}</td>
+                <td>{{ transaction.created_at|date:"d-m-Y" }}</td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            
+        {% endif %}
+   </tbody>
+   <!-- Optional: <tfoot> can be included if needed -->
+<!--   <tfoot>-->
+<!--        <tr>-->
+<!--            <th>SL No.</th>-->
+<!--            <th>Request Amount</th>-->
+<!--            <th>Service Charge</th>-->
+<!--            <th>Charge Amount</th>-->
+<!--            <th>Final Amount</th>-->
+<!--            <th>Status</th>-->
+<!--            <th>Remarks</th>-->
+<!--            <th>Admin Remarks</th>-->
+<!--            <th>Date</th>-->
+<!--        </tr>-->
+<!--   </tfoot>-->
+</table>
+
+             </div>
+        </div>
+    </div>
+</div>
+<br /><br /><br /><br /><br /><br />
+
+{% endblock %}
+{% block script %}
+
+{% endblock %}

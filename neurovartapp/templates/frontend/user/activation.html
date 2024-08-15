@@ -1,0 +1,86 @@
+{% extends 'frontend/user/layout/app.html' %}
+{% block title %} {{ APP_NAME }} | Activation {% endblock %}
+{% block style %}
+<style>
+    form {
+        padding: 45px;
+        border: 1px solid #ccc;
+    }
+
+    form input {
+        border: 1px solid #f9b707 !important;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="col-sm-12 col-lg-6">
+    <div class="card">
+        <div class="card-header d-flex justify-content-between">
+            <div class="header-title">
+                <h4 class="card-title">Id Activation</h4>
+            </div>
+        </div>
+        <div class="card-body">
+            <p></p>
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-solid alert-{{ message.tags }} alert-dismissible fade show mb-3" role="alert">
+                <span>{{ message }}</span>
+                <button type="button" class="btn-close " data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% if request.user.package_id == 1 %}
+            <form class="form-horizontal" method="post" id="activationForm" action="{% url 'userActivation' %}"
+                onsubmit="checkForm()">
+                {% csrf_token %}
+                <div class="form-group row">
+                    <label class="control-label col-sm-3 align-self-center mb-0" for="amount">Amount :</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="amount" name="amount" required
+                            placeholder="Enter Activation Amount" autocomplete="off" step="any">
+                        <span id="message"></span>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center gap-2 flex-wrap">
+                    <button type="submit" class="btn btn-primary rounded text-capitalize">Pay</button>
+                </div>
+            </form>
+            {% else %}
+            <div align="center">
+                <img src="/static/frontend/images/success.gif" style="width:150px;" />
+                <h5>You are an active member.</h5>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<br /><br /><br /><br /><br /><br />
+{% endblock %}
+{% block script %}
+<script>
+    function checkForm() {
+        $('#message').show();
+        var amount = $('#amount').val().trim();
+        if (amount) {
+            if (amount > 9)
+                return true;
+            else {
+                $('#message').text('Amount must be equal to 10 or more!');
+                event.preventDefault();
+            }
+        }
+        else {
+            $('#message').text('Amount required!');
+            event.preventDefault();
+        }
+    }
+    $('#amount').keyup(function () {
+        var amount = $(this).val().trim();
+        if (amount > 9)
+            $('#message').hide();
+        else
+            $('#message').show();
+    });
+</script>
+{% endblock %}

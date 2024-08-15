@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>{{ APP_NAME }} </title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/static/frontend/images/favicon.ico" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="/static/frontend/css/bootstrap.min.css">
+    <!-- Typography CSS -->
+    <link rel="stylesheet" href="/static/frontend/css/typography.css">
+    <!-- style CSS -->
+    <link rel="stylesheet" type="text/css" href="/static/frontend/css/style.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" type="text/css" href="/static/frontend/css/responsive.css">
+    <!-- apexchart CSS -->
+    <link rel="stylesheet" type="text/css" href="/static/frontend/css/apexcharts.css">
+    <!-- Style customizer (Remove these two lines please) -->
+    <link rel="stylesheet" href="/static/frontend/css/style-customizer.css" />
+    <!-- swiper -->
+    <link rel="stylesheet" href="/static/frontend/swiper/swiper.css">
+    <link rel="stylesheet" href="/static/frontend/swiper/swiper.min.css">
+
+    <!-- swiper  -->
+    <script src="/static/frontend/swiper/swiper.min.js"></script>
+    <!-- swiper  -->
+</head>
+
+<body>
+    <!-- loading -->
+    <div id="loading">
+        <div id="loading-center">
+            <img src="/static/frontend/images/loader.gif" alt="loder">
+        </div>
+    </div>
+    <!-- loading End -->
+    <!-- Header -->
+    <header class="transparent">
+        <div class="topbar">
+            <div class="container-fuild">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="topbar-left">
+                            <ul class="list-inline">
+                                <li class="list-inline-item">
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8.60995 9.39382C11.9342 12.7171 12.6883 8.87243 14.8049 10.9875C16.8454 13.0275 18.0182 13.4362 15.4329 16.0208C15.109 16.281 13.0515 19.412 5.82067 12.1832C-1.41107 4.9535 1.71815 2.89387 1.97847 2.57012C4.57005 -0.0216324 4.97171 1.15798 7.01224 3.19794C9.1288 5.31391 5.28571 6.07051 8.60995 9.39382Z" stroke="#f9b707" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg> {{ APP_MOBILE }}
+                                </li>
+                                <li class="list-inline-item">
+                                    <svg width="16" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M14.9188 6.37598L11.2161 9.38684C10.5165 9.94184 9.5322 9.94184 8.83262 9.38684L5.09863 6.37598" stroke="#f9b707" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M14.0906 16.5C16.625 16.507 18.3332 14.4246 18.3332 11.8653V6.14168C18.3332 3.58235 16.625 1.5 14.0906 1.5H5.90912C3.37466 1.5 1.6665 3.58235 1.6665 6.14168V11.8653C1.6665 14.4246 3.37466 16.507 5.90912 16.5H14.0906Z" stroke="#f9b707" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg> {{ APP_EMAIL }}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="iq-header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="logo">
+                            <a href="/"><img id="logo_img" class="img-fluid" src="/static/frontend/images/logo-white.png" alt="logo">
+                            <b class="logoName">{{ APP_NAME }}</b></a>
+                        </div>
+                        <nav> <a id="resp-menu" class="responsive-menu" href="javascript:void(0)"><i class="fa fa-reorder"></i> Menu</a>
+                            <ul class="menu text-end">
+                                <li><a class="active" href="/">HOME</a></li>
+                                <li><a class="" href="javascript:void(0)">About Us</a></li>
+                                <li><a class="" href="javascript:void(0)">Contact Us</a></li>
+
+                                {% if user.is_authenticated %}
+                                <li class="list-inline-item d-flex">
+                                    <a href="{% url 'userDashboard' %}">
+                                        <svg style="margin-bottom:6px;" width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M9.14373 20.7821V17.7152C9.14372 16.9381 9.77567 16.3067 10.5584 16.3018H13.4326C14.2189 16.3018 14.8563 16.9346 14.8563 17.7152V20.7732C14.8562 21.4473 15.404 21.9951 16.0829 22H18.0438C18.9596 22.0023 19.8388 21.6428 20.4872 21.0007C21.1356 20.3586 21.5 19.4868 21.5 18.5775V9.86585C21.5 9.13139 21.1721 8.43471 20.6046 7.9635L13.943 2.67427C12.7785 1.74912 11.1154 1.77901 9.98539 2.74538L3.46701 7.9635C2.87274 8.42082 2.51755 9.11956 2.5 9.86585V18.5686C2.5 20.4637 4.04738 22 5.95617 22H7.87229C8.19917 22.0023 8.51349 21.8751 8.74547 21.6464C8.97746 21.4178 9.10793 21.1067 9.10792 20.7821H9.14373Z" fill="currentColor">
+                                             </path>
+                                        </svg><span>Dashboard</span>
+                                    </a>
+                                </li>
+                                 <li class="list-inline-item d-flex">
+                                    <a href="{% url 'create_investment' %}">
+                                       <span>Apply For Fund</span>
+                                    </a>
+                                </li>
+
+                                {% else %}
+
+
+                                <li class="list-inline-item d-flex"><a href="{% url 'login' %}"><svg width="16" class="me-2" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M11.1772 9.01823H1.14307" stroke="#f9b707" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M8.7373 6.58838L11.1773 9.01838L8.7373 11.4484" stroke="#f9b707" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M5.08691 5.15756V4.38006C5.08691 2.68423 6.46108 1.31006 8.15775 1.31006H12.2277C13.9194 1.31006 15.2902 2.68089 15.2902 4.37256V13.6559C15.2902 15.3517 13.9152 16.7267 12.2194 16.7267H8.14858C6.45775 16.7267 5.08691 15.3551 5.08691 13.6642V12.8792" stroke="#f9b707" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>Login/Register </a>
+                                </li>
+                                {% endif %}
+
+
+
+
+
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Header End -->

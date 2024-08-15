@@ -1,0 +1,115 @@
+{% extends 'frontend/user/layout/app.html' %}
+{% block title %} {{ APP_NAME }} | Wallet {% endblock %}
+{% block style %}
+<style>    
+    #datatable_length, #datatable_info{display: none;}
+    #datatable_filter input{border: 1px solid #dda30a;}
+</style>
+{% endblock %}
+{% block content %}
+<div class="col-sm-12 col-lg-12">
+    <div class="card">
+        <div class="card-header d-flex justify-content-between">
+            <div class="header-title">
+                <h4 class="card-title">Wallet Transactions</h4>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="datatable" border="1" class="table table-striped iq-table1" data-toggle="data-table">
+                   <thead>
+                      <tr>
+                         <th>SL No.</th>
+                         <th>Trnx Id</th>
+                         <th>Opening</th>
+                         <th>Debit</th>
+                         <th>Credit</th>
+                         <th>Closing</th>
+                         <th>Remarks</th>
+                         <th>level</th>
+                         <th>Date</th>
+                      </tr>
+                   </thead>
+                   <tbody>
+                        {% if wallets %}
+                            {% for wallet in wallets %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ wallet.transaction_id }}</td> 
+                                <td>{{ wallet.opening }}</td>  
+                                <td>{{ wallet.debit }}</td>  
+                                <td>{{ wallet.credit }}</td>  
+                                <td>{{ wallet.closing }}</td>  
+                                <td>{{ wallet.message }}</td> 
+                                <td>
+                                    {% if wallet.level %}
+                                        {{ wallet.level }}
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </td>
+                                <td>{{ wallet.created_at|date:"d-m-Y H:i:s" }}</td>  
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td>No Data Found!</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        {% endif %}
+                   </tbody>
+                   <tfoot>
+                        <tr>
+                            <th>SL No.</th>
+                            <th>Trnx Id</th>
+                            <th>Opening</th>
+                            <th>Debit</th>
+                            <th>Credit</th>
+                            <th>Closing</th>
+                            <th>Remarks</th>
+                            <th>level</th>
+                            <th>Date</th>
+                        </tr>
+                   </tfoot>
+                </table>
+             </div>
+           
+        </div>
+    </div>
+</div>
+<br /><br /><br /><br /><br /><br />
+{% endblock %}
+{% block script %}
+<script>
+    function checkForm() {
+        $('#message').show();
+        var amount = $('#amount').val().trim();
+        if (amount) {
+            if (amount > 9)
+                return true;
+            else {
+                $('#message').text('Amount must be equal to 10 or more!');
+                event.preventDefault();
+            }
+        }
+        else {
+            $('#message').text('Amount required!');
+            event.preventDefault();
+        }
+    }
+    $('#amount').keyup(function () {
+        var amount = $(this).val().trim();
+        if (amount > 9)
+            $('#message').hide();
+        else
+            $('#message').show();
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'frontend/user/layout/app.html' %}
+{% block title %} {{ APP_NAME }} | Investments in Me {% endblock %}
+{% block style %}
+<style>
+    #datatable_length, #datatable_info{display: none;}
+    #datatable_filter input{border: 1px solid #dda30a;}
+</style>
+{% endblock %}
+{% block content %}
+<div class="col-sm-12 col-lg-12">
+    <div class="card">
+        <div class="card-header d-flex justify-content-between">
+            <div class="header-title">
+                <h4 class="card-title">Investments in Me ({{ investments_in_me|length }})</h4>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table border="1" class="table table-striped iq-table1">
+                    <thead>
+                        <tr>
+                            <th>SL No.</th>
+                            <th>Investor ID</th>
+                            <th>Amount</th>
+                            <th>Invested At</th>
+                            <th>Last Credit Date</th>
+                            <th>End Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if investments_in_me %}
+                            {% for investment in investments_in_me %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>NEUROVART_00{{ investment.cus_id }}</td>
+                                <td>{{ investment.amount }}</td>
+                                <td>{{ investment.created_at|date:"d-m-Y H:i:s" }}</td>
+                                <td>{{ investment.last_credit_date|date:"d-m-Y H:i:s" }}</td>
+                                <td>{{ investment.end_date|date:"d-m-Y H:i:s" }}</td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="6">No Data Found!</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

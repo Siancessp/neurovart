@@ -1,0 +1,117 @@
+{% extends 'frontend/user/layout/app.html' %}
+{% block title %} {{ APP_NAME }} | Create Investment Form {% endblock %}
+{% block style %}
+<style>
+    form {
+        padding: 45px;
+        border: 1px solid #ccc;
+    }
+
+    form input, form select, form textarea {
+        border: 1px solid #f9b707 !important;
+        margin-bottom: 15px;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-header d-flex justify-content-between">
+            <div class="header-title">
+                <h4 class="card-title">Create Investment Form</h4>
+            </div>
+        </div>
+        <div class="card-body">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-solid alert-{{ message.tags }} alert-dismissible fade show mb-3" role="alert">
+                <span>{{ message }}</span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+            {% endif %}
+            <form class="form-horizontal" method="post" enctype="multipart/form-data" action="{% url 'create_investment' %}">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label" for="full_name">Full Name :</label>
+                            {{ form.full_name }}
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label" for="country_code">Country Code :</label>
+                            {{ form.country_code }}
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label" for="whatsapp_no">WhatsApp No :</label>
+                            {{ form.whatsapp_no }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label" for="email">Email Address :</label>
+                            {{ form.email }}
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label" for="residential_address">Residential Address :</label>
+                            {{ form.residential_address }}
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label" for="investment_amount">Investment Amount ($) :</label>
+                            {{ form.investment_amount }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label" for="commission_percentage">Commission Percentage :</label>
+                            {{ form.commission_percentage }}
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label" for="risk_ratio">Risk Ratio :</label>
+                            {{ form.risk_ratio }}
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label" for="id_upload">Upload your ID (both front and back page) :</label>
+                            {{ form.id_upload }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label" for="performance_link">Performance Link :</label>
+                            {{ form.performance_link }}
+                        </div>
+                    </div>
+                    <div class="col-sm-4 offset-sm-4">
+                        <div class="form-group">
+                            {{ form.terms }}
+                            <label for="id_terms">I agree with the <a href="#" target="_blank">Terms & Conditions</a></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center gap-2 flex-wrap">
+                    <button type="submit" class="btn btn-primary rounded text-capitalize">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<br /><br /><br /><br /><br /><br />
+{% endblock %}

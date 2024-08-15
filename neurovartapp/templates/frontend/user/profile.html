@@ -1,0 +1,128 @@
+{% extends 'frontend/user/layout/app.html' %}
+
+{% block title %} {{ APP_NAME }} | Profile {% endblock %}
+
+{% block style %}
+<style>
+    .st-btn[data-network="copy"] {
+        display: none !important;
+    }
+    .profile-pic {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+</style>
+{% endblock %}
+
+{% block headerScript %}
+<script type='text/javascript'
+    src='https://platform-api.sharethis.com/js/sharethis.js#property=669ba865cc04fc0019b76428&product=sop'
+    async='async'></script>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid content-inner pb-0">
+    <div class="row pt-2">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-12">
+                             {% if messages %}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="alert alert-info">
+                                        {% for message in messages %}
+                                            <p>{{ message }}</p>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between">
+
+                                    <div class="header-title">
+                                        <h4 class="card-title">Profile</h4>
+                                    </div>
+                                    <br><br><br>
+                                </div>
+                                <div class="row card-body" style="padding:0;">
+                                    <div class="col-lg-4 text-center">
+                                        <div class="shadow-lg p-4 shadow-showcase">
+                                            {% if request.user.profile %}
+                                            <img src="{{ request.user.profile.url }}" class="img-fluid" style="width:130px;height:130px;" alt="logo">
+                                            {% else %}
+                                            <img src="/static/frontend/images/logo.png" class="img-fluid" style="width:130px;height:130px;" alt="logo">
+                                                {% endif %}
+                                            <form method="POST" enctype="multipart/form-data" action="{% url 'update_profile_picture' %}">
+                                                {% csrf_token %}
+                                                <input type="file" required name="profile" class="form-control mb-2">
+                                                <button type="submit" class="btn btn-outline-primary fullWidth">Update Picture</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="shadow-lg p-4 shadow-showcase">
+                                            <form method="POST" action="{% url 'update_profile' %}">
+                                                {% csrf_token %}
+                                                <div class="mb-3">
+                                                    <label for="name" class="form-label">Name</label>
+                                                    <input type="text" class="form-control" id="name" name="cus_name" value="{{ request.user.cus_name }}">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="mobile" class="form-label">Mobile</label>
+                                                    <input type="text" class="form-control" id="mobile" name="cus_mobile" value="{{ request.user.cus_mobile }}">
+                                                </div>
+                                                <button type="submit" class="btn btn-outline-primary fullWidth">Update Profile</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="shadow-lg p-4 shadow-showcase">
+                                            <form method="POST" action="{% url 'update_password' %}">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="old_password" class="form-label">Current Password</label>
+        <input type="password" placeholder="********" required class="form-control" id="old_password" name="old_password">
+    </div>
+    <div class="mb-3">
+        <label for="new_password1" class="form-label">New Password</label>
+        <input type="password" placeholder="********" required class="form-control" id="new_password1" name="new_password1">
+    </div>
+    <div class="mb-3">
+        <label for="new_password2" class="form-label">Confirm Password</label>
+        <input type="password" placeholder="********" required class="form-control" id="new_password2" name="new_password2">
+    </div>
+    <button type="submit" class="btn btn-outline-primary fullWidth">Update Password</button>
+</form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+function copyCode() {
+  var $temp = $("<input>");
+  $("body").append($temp);
+  $temp.val($('#copyCode').text()).select();
+  document.execCommand("copy");
+  $temp.remove();
+  $('#copied').show();
+  $('#copied').html('<svg width="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:25px;"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.7281 21.9137C11.8388 21.9715 11.9627 22.0009 12.0865 22C12.2103 21.999 12.3331 21.9686 12.4449 21.9097L16.0128 20.0025C17.0245 19.4631 17.8168 18.8601 18.435 18.1579C19.779 16.6282 20.5129 14.6758 20.4998 12.6626L20.4575 6.02198C20.4535 5.25711 19.9511 4.57461 19.2082 4.32652L12.5707 2.09956C12.1711 1.96424 11.7331 1.96718 11.3405 2.10643L4.72824 4.41281C3.9893 4.67071 3.496 5.35811 3.50002 6.12397L3.54231 12.7597C3.5554 14.7758 4.31448 16.7194 5.68062 18.2335C6.3048 18.9258 7.10415 19.52 8.12699 20.0505L11.7281 21.9137ZM10.7836 14.1089C10.9326 14.2521 11.1259 14.3227 11.3192 14.3207C11.5125 14.3186 11.7036 14.2441 11.8495 14.1053L16.147 9.98772C16.4162 9.73024 16.4274 9.30667 16.1701 9.0375C15.9127 8.76833 15.4891 8.75708 15.2199 9.01457L11.3261 12.796L9.8723 11.4505C9.60302 11.1975 9.17948 11.2068 8.92655 11.4761C8.67361 11.7453 8.68289 12.1688 8.95217 12.4218L10.7836 14.1089Z" fill="#39c449"></path></svg> Code Copied.');
+}
+</script>
+{% endblock %}

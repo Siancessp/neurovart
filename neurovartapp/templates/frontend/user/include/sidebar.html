@@ -1,0 +1,232 @@
+<aside class="sidebar sidebar-default navs-rounded ">
+    <div class="sidebar-header d-flex align-items-center justify-content-start">
+        <a href="{% url 'index' %}" class="navbar-brand dis-none align-items-center">
+            <img src="/static/frontend/images/logo.png" class="img-fluid" style="width:75px;" alt="logo">            <h4
+                class="logo-title m-0">{{ APP_NAME }}</h4>
+        </a>
+        <div class="sidebar-toggle" data-toggle="sidebar" data-active="true">
+            <i class="icon">
+                <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4.25 12.2744L19.25 12.2744" stroke="currentColor" stroke-width="1.5"></path>
+                    <path d="M10.2998 18.2988L4.2498 12.2748L10.2998 6.24976" stroke="currentColor"
+                          stroke-width="1.5"></path>
+                </svg>
+            </i>
+        </div>
+    </div>
+    <div class="sidebar-body p-0 data-scrollbar">
+        <div class="navbar-collapse pe-3" id="sidebar">
+            <ul class="navbar-nav iq-main-menu">
+                <li class="nav-item ">
+                    <a class="nav-link {% if request.path == '/user/dashboard' %}active{% endif %}" aria-current="page" href="{% url 'userDashboard' %}">
+                        <i class="icon">
+                            <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                        d="M9.14373 20.7821V17.7152C9.14372 16.9381 9.77567 16.3067 10.5584 16.3018H13.4326C14.2189 16.3018 14.8563 16.9346 14.8563 17.7152V20.7732C14.8562 21.4473 15.404 21.9951 16.0829 22H18.0438C18.9596 22.0023 19.8388 21.6428 20.4872 21.0007C21.1356 20.3586 21.5 19.4868 21.5 18.5775V9.86585C21.5 9.13139 21.1721 8.43471 20.6046 7.9635L13.943 2.67427C12.7785 1.74912 11.1154 1.77901 9.98539 2.74538L3.46701 7.9635C2.87274 8.42082 2.51755 9.11956 2.5 9.86585V18.5686C2.5 20.4637 4.04738 22 5.95617 22H7.87229C8.19917 22.0023 8.51349 21.8751 8.74547 21.6464C8.97746 21.4178 9.10793 21.1067 9.10792 20.7821H9.14373Z"
+                                        fill="currentColor"></path>
+                            </svg>
+                        </i>
+                        <span class="item-name">Dashboard</span>
+                    </a>
+                </li>
+    {% if  user.is_staff %}
+                <li class="nav-item ">
+                    <a class="nav-link {% if request.path == '/super/dashboard' %}active{% endif %}" aria-current="page" href="{% url 'admindashboard' %}">
+                        <i class="icon">
+                            <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                        d="M9.14373 20.7821V17.7152C9.14372 16.9381 9.77567 16.3067 10.5584 16.3018H13.4326C14.2189 16.3018 14.8563 16.9346 14.8563 17.7152V20.7732C14.8562 21.4473 15.404 21.9951 16.0829 22H18.0438C18.9596 22.0023 19.8388 21.6428 20.4872 21.0007C21.1356 20.3586 21.5 19.4868 21.5 18.5775V9.86585C21.5 9.13139 21.1721 8.43471 20.6046 7.9635L13.943 2.67427C12.7785 1.74912 11.1154 1.77901 9.98539 2.74538L3.46701 7.9635C2.87274 8.42082 2.51755 9.11956 2.5 9.86585V18.5686C2.5 20.4637 4.04738 22 5.95617 22H7.87229C8.19917 22.0023 8.51349 21.8751 8.74547 21.6464C8.97746 21.4178 9.10793 21.1067 9.10792 20.7821H9.14373Z"
+                                        fill="currentColor"></path>
+                            </svg>
+                        </i>
+                        <span class="item-name">Admin</span>
+                    </a>
+                </li>
+
+
+                                {% else %}
+
+                                {% endif %}
+                <li class="nav-item ">
+                    <a class="nav-link {% if request.path == '/user/apply_fund_list' %} active {% endif %}" aria-current="page" href="{% url 'apply_fund_list' %}">
+                        <i class="icon">
+                            <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                        d="M11.997 15.1746C7.684 15.1746 4 15.8546 4 18.5746C4 21.2956 7.661 21.9996 11.997 21.9996C16.31 21.9996 19.994 21.3206 19.994 18.5996C19.994 15.8786 16.334 15.1746 11.997 15.1746Z"
+                                        fill="currentColor"></path>
+                                <path opacity="0.4"
+                                      d="M11.9971 12.5838C14.9351 12.5838 17.2891 10.2288 17.2891 7.29176C17.2891 4.35476 14.9351 1.99976 11.9971 1.99976C9.06008 1.99976 6.70508 4.35476 6.70508 7.29176C6.70508 10.2288 9.06008 12.5838 11.9971 12.5838Z"
+                                      fill="currentColor"></path>
+                            </svg>
+                        </i>
+                        <span class="item-name">Investment</span>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link {% if request.path == '/user/activation' %} active {% endif %}" aria-current="page" href="{% url 'userActivation' %}">
+                        <i class="icon">
+                            <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                        d="M11.997 15.1746C7.684 15.1746 4 15.8546 4 18.5746C4 21.2956 7.661 21.9996 11.997 21.9996C16.31 21.9996 19.994 21.3206 19.994 18.5996C19.994 15.8786 16.334 15.1746 11.997 15.1746Z"
+                                        fill="currentColor"></path>
+                                <path opacity="0.4"
+                                      d="M11.9971 12.5838C14.9351 12.5838 17.2891 10.2288 17.2891 7.29176C17.2891 4.35476 14.9351 1.99976 11.9971 1.99976C9.06008 1.99976 6.70508 4.35476 6.70508 7.29176C6.70508 10.2288 9.06008 12.5838 11.9971 12.5838Z"
+                                      fill="currentColor"></path>
+                            </svg>
+                        </i>
+                        <span class="item-name">Activation</span>
+                    </a>
+                </li>
+
+                <li class="nav-item ">
+                    <a class="nav-link {% if request.path == '/user/wallet' %} active {% endif %}" aria-current="page" href="{% url 'userWallet' %}">
+                        <i class="icon">
+                            <svg width="32" style="width:20px;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21.6389 14.3957H17.5906C16.1042 14.3948 14.8993 13.1909 14.8984 11.7045C14.8984 10.218 16.1042 9.01409 17.5906 9.01318H21.6389" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M18.049 11.6429H17.7373" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.74766 3H16.3911C19.2892 3 21.6388 5.34951 21.6388 8.24766V15.4247C21.6388 18.3229 19.2892 20.6724 16.3911 20.6724H7.74766C4.84951 20.6724 2.5 18.3229 2.5 15.4247V8.24766C2.5 5.34951 4.84951 3 7.74766 3Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>                                    <path d="M7.03516 7.5382H12.4341" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>                            
+                        </i>
+                        <span class="item-name">Wallet</span>
+                    </a>
+                </li>
+<li class="nav-item ">
+                    <a class="nav-link {% if request.path == '/user/myInvestment' %} active {% endif %}" aria-current="page" href="{% url 'myInvestment' %}">
+                        <i class="icon">
+                            <svg width="32" style="width:20px;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21.6389 14.3957H17.5906C16.1042 14.3948 14.8993 13.1909 14.8984 11.7045C14.8984 10.218 16.1042 9.01409 17.5906 9.01318H21.6389" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M18.049 11.6429H17.7373" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.74766 3H16.3911C19.2892 3 21.6388 5.34951 21.6388 8.24766V15.4247C21.6388 18.3229 19.2892 20.6724 16.3911 20.6724H7.74766C4.84951 20.6724 2.5 18.3229 2.5 15.4247V8.24766C2.5 5.34951 4.84951 3 7.74766 3Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>                                    <path d="M7.03516 7.5382H12.4341" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </i>
+                        <span class="item-name">MyInvestments</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-sponsor" role="button" aria-expanded="false" aria-controls="sidebar-sponsors">
+                        <i class="icon">
+                            <svg width="32" style="width:20px;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">                                    
+                                <path d="M17.8877 10.8967C19.2827 10.7007 20.3567 9.50473 20.3597 8.05573C20.3597 6.62773 19.3187 5.44373 17.9537 5.21973" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>                                    <path d="M19.7285 14.2505C21.0795 14.4525 22.0225 14.9255 22.0225 15.9005C22.0225 16.5715 21.5785 17.0075 20.8605 17.2815" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M11.8867 14.6638C8.67273 14.6638 5.92773 15.1508 5.92773 17.0958C5.92773 19.0398 8.65573 19.5408 11.8867 19.5408C15.1007 19.5408 17.8447 19.0588 17.8447 17.1128C17.8447 15.1668 15.1177 14.6638 11.8867 14.6638Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M11.8869 11.888C13.9959 11.888 15.7059 10.179 15.7059 8.069C15.7059 5.96 13.9959 4.25 11.8869 4.25C9.7779 4.25 8.0679 5.96 8.0679 8.069C8.0599 10.171 9.7569 11.881 11.8589 11.888H11.8869Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>                                    <path d="M5.88509 10.8967C4.48909 10.7007 3.41609 9.50473 3.41309 8.05573C3.41309 6.62773 4.45409 5.44373 5.81909 5.21973" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M4.044 14.2505C2.693 14.4525 1.75 14.9255 1.75 15.9005C1.75 16.5715 2.194 17.0075 2.912 17.2815" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </i>
+                        <span class="item-name">Sponsor List</span>
+                        <i class="right-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </i>
+                    </a>
+                    <ul class="sub-nav collapse" id="sidebar-sponsor" data-bs-parent="#sidebar">
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.path == '/user/active-sponsor-list' %} active {% endif %}" href="{% url 'activeSponsorList' %}">
+                                <i class="icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" stroke-width="1.5" width="16" viewBox="0 0 24 24" fill="none">
+                                        <circle cx="12" cy="12" r="7.5" stroke="currentColor"></circle>
+                                    </svg>
+                                </i>
+                                <i class="sidenav-mini-icon"> A </i>
+                                <span class="item-name">Active List</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.path == '/user/inactive-sponsor-list' %} active {% endif %}" href="{% url 'inactiveSponsorList' %}">
+                                <i class="icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" stroke-width="1.5" width="16" viewBox="0 0 24 24" fill="none">
+                                        <circle cx="12" cy="12" r="7.5" stroke="currentColor"></circle>
+                                    </svg>
+                                </i>
+                                <i class="sidenav-mini-icon"> I </i>
+                                <span class="item-name">Inactive List</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+    <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-fund" role="button" aria-expanded="false" aria-controls="sidebar-fund">
+        <i class="icon">
+            <svg width="32" style="width:20px;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17.8877 10.8967C19.2827 10.7007 20.3567 9.50473 20.3597 8.05573C20.3597 6.62773 19.3187 5.44373 17.9537 5.21973" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M19.7285 14.2505C21.0795 14.4525 22.0225 14.9255 22.0225 15.9005C22.0225 16.5715 21.5785 17.0075 20.8605 17.2815" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M11.8867 14.6638C8.67273 14.6638 5.92773 15.1508 5.92773 17.0958C5.92773 19.0398 8.65573 19.5408 11.8867 19.5408C15.1007 19.5408 17.8447 19.0588 17.8447 17.1128C17.8447 15.1668 15.1177 14.6638 11.8867 14.6638Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M11.8869 11.888C13.9959 11.888 15.7059 10.179 15.7059 8.069C15.7059 5.96 13.9959 4.25 11.8869 4.25C9.7779 4.25 8.0679 5.96 8.0679 8.069C8.0599 10.171 9.7569 11.881 11.8589 11.888H11.8869Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M5.88509 10.8967C4.48909 10.7007 3.41609 9.50473 3.41309 8.05573C3.41309 6.62773 4.45409 5.44373 5.81909 5.21973" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M4.044 14.2505C2.693 14.4525 1.75 14.9255 1.75 15.9005C1.75 16.5715 2.194 17.0075 2.912 17.2815" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+        </i>
+        <span class="item-name">Fund Lists</span>
+        <i class="right-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+        </i>
+    </a>
+    <ul class="sub-nav collapse" id="sidebar-fund" data-bs-parent="#sidebar">
+        <li class="nav-item">
+            <a class="nav-link {% if request.path == '/user/apply-for-fund-list' %} active {% endif %}" href="{% url 'my_fund_applications' %}">
+                <i class="icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" stroke-width="1.5" width="16" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="7.5" stroke="currentColor"></circle>
+                    </svg>
+                </i>
+                <i class="sidenav-mini-icon"> A </i>
+                <span class="item-name">Applied Funds</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {% if request.path == '/user/investment-for-fund-list' %} active {% endif %}" href="{% url 'investments_in_me' %}">
+                <i class="icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" stroke-width="1.5" width="16" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="7.5" stroke="currentColor"></circle>
+                    </svg>
+                </i>
+                <i class="sidenav-mini-icon"> I </i>
+                <span class="item-name">Investments in Funds</span>
+            </a>
+        </li>
+    </ul>
+</li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-widget" role="button" aria-expanded="false" aria-controls="sidebar-widget">
+                        <i class="icon">
+                            <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path opacity="0.4" d="M21.25 13.4764C20.429 13.4764 19.761 12.8145 19.761 12.001C19.761 11.1865 20.429 10.5246 21.25 10.5246C21.449 10.5246 21.64 10.4463 21.78 10.3076C21.921 10.1679 22 9.97864 22 9.78146L21.999 7.10415C21.999 4.84102 20.14 3 17.856 3H6.144C3.86 3 2.001 4.84102 2.001 7.10415L2 9.86766C2 10.0648 2.079 10.2541 2.22 10.3938C2.36 10.5325 2.551 10.6108 2.75 10.6108C3.599 10.6108 4.239 11.2083 4.239 12.001C4.239 12.8145 3.571 13.4764 2.75 13.4764C2.336 13.4764 2 13.8093 2 14.2195V16.8949C2 19.158 3.858 21 6.143 21H17.857C20.142 21 22 19.158 22 16.8949V14.2195C22 13.8093 21.664 13.4764 21.25 13.4764Z" fill="currentColor"></path>
+                                <path d="M15.4303 11.5887L14.2513 12.7367L14.5303 14.3597C14.5783 14.6407 14.4653 14.9177 14.2343 15.0837C14.0053 15.2517 13.7063 15.2727 13.4543 15.1387L11.9993 14.3737L10.5413 15.1397C10.4333 15.1967 10.3153 15.2267 10.1983 15.2267C10.0453 15.2267 9.89434 15.1787 9.76434 15.0847C9.53434 14.9177 9.42134 14.6407 9.46934 14.3597L9.74734 12.7367L8.56834 11.5887C8.36434 11.3907 8.29334 11.0997 8.38134 10.8287C8.47034 10.5587 8.70034 10.3667 8.98134 10.3267L10.6073 10.0897L11.3363 8.61268C11.4633 8.35868 11.7173 8.20068 11.9993 8.20068H12.0013C12.2843 8.20168 12.5383 8.35968 12.6633 8.61368L13.3923 10.0897L15.0213 10.3277C15.2993 10.3667 15.5293 10.5587 15.6173 10.8287C15.7063 11.0997 15.6353 11.3907 15.4303 11.5887Z" fill="currentColor"></path>
+                            </svg>
+                        </i>
+                        <span class="item-name">PayOut</span>
+                        <i class="right-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </i>
+                    </a>
+                    <ul class="sub-nav collapse" id="sidebar-widget" data-bs-parent="#sidebar">
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.path == '/user/create_payout' %} active {% endif %}" href="create_payout">
+                                <i class="icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" stroke-width="1.5" width="16" viewBox="0 0 24 24" fill="none">
+                                        <circle cx="12" cy="12" r="7.5" stroke="currentColor"></circle>
+                                    </svg>
+                                </i>
+                                <i class="sidenav-mini-icon"> W </i>
+                                <span class="item-name">Request For PayOut</span>
+                            </a>
+                        </li>                            
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.path == '/user/payoutlist' %} active {% endif %}" href="payoutlist">
+                                <i class="icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" stroke-width="1.5" width="16" viewBox="0 0 24 24" fill="none">
+                                        <circle cx="12" cy="12" r="7.5" stroke="currentColor"></circle>
+                                    </svg>
+                                </i>
+                                <i class="sidenav-mini-icon"> W </i>
+                                <span class="item-name">PayOut List</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</aside>

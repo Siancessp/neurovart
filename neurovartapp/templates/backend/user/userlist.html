@@ -1,0 +1,99 @@
+
+
+{% extends 'backend/user/layout/app.html' %}
+{% block title %} {{ APP_NAME }} | UserList {% endblock %}
+{% block style %}
+<style>
+    #datatable_length, #datatable_info{display: none;}
+    #datatable_filter input{border: 1px solid #dda30a;}
+</style>
+{% endblock %}
+{% block newcontent %}
+<div class="col-sm-12 col-lg-12">
+    <div class="card">
+        <div class="card-header d-flex justify-content-between">
+            <div class="header-title">
+                <h4 class="card-title">UserList</h4>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="datatable" border="1" class="table table-striped iq-table1" data-toggle="data-table">
+    <thead>
+        <tr>
+            <th>Sl No</th>
+            <th>Code</th>
+            <th>Package ID</th>
+            <th>Is User</th>
+            <th>Package Amount</th>
+            <th>Purchase Package</th>
+            <th>Sponsor ID</th>
+            <th>Sponsor Code</th>
+            <th>Level</th>
+            <th>M Tree</th>
+            <th>Name</th>
+            <th>Wallet</th>
+            <th>Mobile</th>
+            <th>Email</th>
+            <th>Bank Name</th>
+            <th>Account No</th>
+            <th>IFSC</th>
+            <th>Image</th>
+            <th>Address</th>
+            <th>Country</th>
+            <th>Mobile Code</th>
+            <th>Status</th>
+            <th>Created At</th>
+            <th>Updated At</th>
+            <th>Deleted At</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if payout %}
+            {% for i in payout %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ i.cus_code }}</td>
+                    <td>{{ i.package_id }}</td>
+                    <td>{{ i.is_user }}</td>
+                    <td>{{ i.package_amount }}</td>
+                    <td>{{ i.purchase_package }}</td>
+                    <td>{{ i.sponsor_id }}</td>
+                    <td>{{ i.sponsor_code }}</td>
+                    <td>{{ i.level }}</td>
+                    <td>{{ i.m_tree }}</td>
+                    <td>{{ i.cus_name }}</td>
+                    <td>{{ i.cus_wallet }}</td>
+                    <td>{{ i.cus_mobile_code }}{{ i.cus_mobile }}</td>
+                    <td>{{ i.cus_email }}</td>
+                    <td>{{ i.cus_bank_name }}</td>
+                    <td>{{ i.cus_account_no }}</td>
+                    <td>{{ i.cus_ifsc }}</td>
+                    <td>{{ i.cus_image }}</td>
+                    <td>{{ i.cus_address }}</td>
+                    <td>{{ i.cus_country }}</td>
+                    <td>{{ i.cus_mobile_code }}</td>
+                    <td>{{ i.cus_status }}</td>
+                    <td>{{ i.created_at }}</td>
+                    <td>{{ i.updated_at }}</td>
+                    <td>{{ i.deleted_at }}</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="25">No Data Found!</td>
+            </tr>
+        {% endif %}
+    </tbody>
+</table>
+
+             </div>
+        </div>
+    </div>
+</div>
+<br /><br /><br /><br /><br /><br />
+{% endblock %}
+{% block script %}
+
+{% endblock %}
+

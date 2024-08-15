@@ -1,0 +1,92 @@
+{% extends 'frontend/user/layout/app.html' %}
+{% block title %} {{ APP_NAME }} | Create PayOut Request {% endblock %}
+{% block style %}
+<style>
+    form {
+        padding: 45px;
+        border: 1px solid #ccc;
+    }
+
+    form input {
+        border: 1px solid #f9b707 !important;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="col-sm-12 col-lg-6">
+    <div class="card">
+        <div class="card-header d-flex justify-content-between">
+            <div class="header-title">
+                <h4 class="card-title">Create PayOut Request</h4>
+            </div>
+        </div>
+        <div class="card-body">
+            <p></p>
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-solid alert-{{ message.tags }} alert-dismissible fade show mb-3" role="alert">
+                <span>{{ message }}</span>
+                <button type="button" class="btn-close " data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+            {% endif %}
+            <form class="form-horizontal" method="post" id="requestForm" action="{% url 'create_payout' %}" onsubmit="checkForm()">
+                {% csrf_token %}
+                
+                <div class="form-group row">
+                    <label class="control-label col-sm-3 align-self-center mb-0" for="request_amount">Request Amount :</label>
+                    <div class="col-sm-9">
+                        {{ form.request_amount }}
+                        <span id="message"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-sm-3 align-self-center mb-0" for="wallet_address">Wallet Address :</label>
+                    <div class="col-sm-9">
+                        {{ form.wallet_address }}
+                        <span id="message"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-sm-3 align-self-center mb-0" for="remarks">Remarks :</label>
+                    <div class="col-sm-9">
+                        {{ form.remarks }}
+                        <span id="message"></span>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center gap-2 flex-wrap">
+                    <button type="submit" class="btn btn-primary rounded text-capitalize">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<br /><br /><br /><br /><br /><br />
+{% endblock %}
+{% block script %}
+<script>
+    function checkForm() {
+        $('#message').show();
+        var amount = $('#id_request_amount').val().trim();
+        if (amount) {
+            if (amount > 0)
+                return true;
+            else {
+                $('#message').text('Amount must be greater than 0!');
+                event.preventDefault();
+            }
+        }
+        else {
+            $('#message').text('Amount required!');
+            event.preventDefault();
+        }
+    }
+    $('#id_request_amount').keyup(function () {
+        var amount = $(this).val().trim();
+        if (amount > 0)
+            $('#message').hide();
+        else
+            $('#message').show();
+    });
+</script>
+{% endblock %}

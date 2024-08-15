@@ -1,0 +1,159 @@
+{% extends 'frontend/user/layout/app.html' %}
+{% block title %} {{ APP_NAME }} | Edit PayOut Request {% endblock %}
+{% block style %}
+<style>
+    form {
+        padding: 45px;
+        border: 1px solid #ccc;
+    }
+    form input {
+        border: 1px solid #f9b707 !important;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="col-sm-12 col-lg-6">
+    <div class="card">
+        <div class="card-header d-flex justify-content-between">
+            <div class="header-title">
+                <h4 class="card-title">Edit PayOut Request</h4>
+            </div>
+        </div>
+        <div class="card-body">
+            <p></p>
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-solid alert-{{ message.tags }} alert-dismissible fade show mb-3" role="alert">
+                <span>{{ message }}</span>
+                <button type="button" class="btn-close " data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+            {% endif %}
+<form class="form-horizontal" method="post" id="requestForm" action="{% url 'edit_payout' payout_id=payout.pk %}" onsubmit="return checkForm()">
+    {% csrf_token %}
+
+    <div class="form-group row">
+        <label class="control-label col-sm-3 align-self-center mb-0" for="status">Status:</label>
+        <div class="col-sm-9">
+            <select name="status" id="status" class="form-control">
+                {% for value, display in status_choices %}
+                    <option value="{{ value }}" {% if value == payout.status %}selected{% endif %}>{{ display }}</option>
+                {% endfor %}
+            </select>
+            <span id="message"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-3 align-self-center mb-0" for="admin_remarks">Admin Remarks:</label>
+        <div class="col-sm-9">
+            <textarea name="admin_remarks" id="admin_remarks" class="form-control">{{ payout.admin_remarks }}</textarea>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-3 align-self-center mb-0" for="transaction_id">Transaction ID:</label>
+        <div class="col-sm-9">
+            <input type="text" name="transaction_id" id="transaction_id" class="form-control" value="{{ payout.transaction_id }}">
+            <span id="message"></span>
+        </div>
+    </div>
+
+    <!-- Display all details -->
+    <div class="form-group row">
+        <label class="control-label col-sm-3 align-self-center mb-0" for="cus_id">Customer ID:</label>
+        <div class="col-sm-9">
+            <p id="cus_id">{{ customer.cus_code }}</p>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-3 align-self-center mb-0" for="request_amount">Request Amount:</label>
+        <div class="col-sm-9">
+            <p id="request_amount">${{ payout.request_amount }}</p>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-3 align-self-center mb-0" for="wallet_address">Wallet Address:</label>
+        <div class="col-sm-9">
+            <p id="wallet_address">{{ payout.wallet_address }}</p>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-3 align-self-center mb-0" for="service_charge">Service Charge:</label>
+        <div class="col-sm-9">
+            <p id="service_charge">{{ payout.service_charge }}%</p>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-3 align-self-center mb-0" for="charge_amount">Charge Amount:</label>
+        <div class="col-sm-9">
+            <p id="charge_amount">${{ payout.charge_amount }}</p>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-3 align-self-center mb-0" for="final_amount">Final Amount:</label>
+        <div class="col-sm-9">
+            <p id="final_amount">${{ payout.final_amount }}</p>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-3 align-self-center mb-0" for="created_at">Created At:</label>
+        <div class="col-sm-9">
+            <p id="created_at">{{ payout.created_at }}</p>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-3 align-self-center mb-0" for="updated_at">Updated At:</label>
+        <div class="col-sm-9">
+            <p id="updated_at">{{ payout.updated_at }}</p>
+        </div>
+    </div>
+
+    <div class="d-flex align-items-center gap-2 flex-wrap">
+        <button type="submit" class="btn btn-primary rounded text-capitalize">Submit</button>
+        <a href="{% url 'payout_list' %}" class="btn btn-danger rounded text-capitalize">Back</a>
+    </div>
+</form>
+
+        </div>
+    </div>
+</div>
+<br /><br /><br /><br /><br /><br />
+{% endblock %}
+{% block script %}
+<script>
+    function checkForm() {
+        $('#message').hide();
+        var amount = $('#id_request_amount').val().trim();
+        if (amount) {
+            if (amount > 0)
+                return true;
+            else {
+                $('#message').text('Amount must be greater than 0!');
+                $('#message').show();
+                return false;
+            }
+        }
+        else {
+            $('#message').text('Amount required!');
+            $('#message').show();
+            return false;
+        }
+    }
+
+    $('#id_request_amount').keyup(function () {
+        var amount = $(this).val().trim();
+        if (amount > 0)
+            $('#message').hide();
+        else
+            $('#message').show();
+    });
+</script>
+{% endblock %}

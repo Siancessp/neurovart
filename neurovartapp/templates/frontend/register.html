@@ -1,0 +1,111 @@
+<!--header-->
+{% include 'frontend/include/header.html' %}
+<link rel="stylesheet" type="text/css" href="/static/frontend/css/intlTelInput.css">
+<style>
+    .loginForm{margin-top:150px;padding:45px;border:1px solid #ccc;}
+    form input, button{border-radius:50px !important;}
+    .iti.iti--allow-dropdown{background:#fff;width:100% !important;border-radius:50px;}
+    .select2-search__field {max-height:44px !important;}
+    .alert-error{padding:0;color:red;}
+</style>
+<!-- Main Content -->
+<div class="main-content">
+    <div class="container text-center">
+        <div class="row align-items-start">
+            <div class="col-md-6 offset-md-3 col-sm-12">
+                <div class="iq-login">
+                    <div class="loginForm">
+                        <h4 class="text-light">Register</h4>
+                        <br/><br/>
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }}">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <form method="post" action="{% url 'register' %}">
+                            {% csrf_token %}
+                            <div class="form-group mb-3">
+                                <input type="text" class="form-control roundBox" name="fullname" id="recipient-name" required placeholder="Full Name">
+                            </div>
+                            <div class="form-group mb-3">
+                                <input type="text" class="form-control roundBox" name="sponsor" value="{{ ref }}"  id="recipient-sponsor" required placeholder="Sponsor Code">
+                            </div>
+                            <div class="form-group mb-3">
+                                <input type="email" class="form-control" name="email"  id="recipient-email" required placeholder="Email Address">
+                            </div>
+                            <div class="input-group mb-3">
+                              <input type="text" id="phone" name="mobile" class="form-control" value="" placeholder="Phone Number" required="" autocomplete="off">
+                            </div>
+                            <div class="form-group mb-3">
+                                <input type="password" class="form-control" name="password"  id="recipient-password" required placeholder="Password">
+                            </div>
+                            <div class="form-group mb-3">
+                                <input type="password" class="form-control" name="confirmPassword"  id="recipient-confirm-password" required placeholder="Confirm Password">
+                                <input type="hidden" id="country" name="country" required value="IN">
+                                <input type="hidden" id="dialCode" name="dialCode" required value="+91">
+                            </div>
+                            <button type="submit" class="button iq-mtb-10">Submit</button>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-check">
+                                        <label class="form-check-label"><input type="checkbox" class="form-check-input">Remember Me</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 text-end">
+                                    &nbsp;
+                                </div>
+                            </div>
+                        </form>
+                        {% if form.errors %}
+                        <div class="alert alert-error">
+                            <strong>Error!</strong> Please correct the following errors:
+                            <ul>
+                                {% for field, errors in form.errors.items %}
+                                    {% for error in errors %}
+                                        <li>{{ field }}: {{ error }}</li>
+                                    {% endfor %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                    </div>
+                    <div class="modal-footer text-center">
+                        <div> Already Have an Account? <a href="{% url 'login' %}" class="iq-font-yellow">Login Now</a></div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Main Content End -->
+
+<!--footer-->
+{% include 'frontend/include/footer.html' %}
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="/static/frontend/js/intlTelInput.js"></script>
+<script>
+    const countryData = window.intlTelInputGlobals.getCountryData();
+    var input = document.querySelector("#phone");
+    //const addressDropdown = document.querySelector("#address-country");
+    window.intlTelInput(input, {
+            preferredCountries: [ 'in', 'bd','us'],
+        separateDialCode: true,
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/19.3.0/js/utils.js",
+    });
+    input.addEventListener("countrychange", function() {
+        // do something with iti.getSelectedCountryData()
+        const iti = window.intlTelInputGlobals.getInstance(input);
+        $('#country').val((iti.getSelectedCountryData().iso2).toUpperCase());
+        $('#dialCode').val('+'+iti.getSelectedCountryData().dialCode);
+    });
+</script>
+
+<!--<script>-->
+<!--    var toasts = document.querySelectorAll('.toast');-->
+<!--    var toastList = toasts.map(function (toast) {-->
+<!--        return new bootstrap.Toast(toast);-->
+<!--    });-->
+<!--    toastList.forEach(toast => toast.show());-->
+<!--</script>-->

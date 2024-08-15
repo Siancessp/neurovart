@@ -1,0 +1,74 @@
+{% extends 'frontend/user/layout/app.html' %}
+{% block title %} {{ APP_NAME }} | Active Sponsor List {% endblock %}
+{% block style %}
+<style>    
+    #datatable_length, #datatable_info{display: none;}
+    #datatable_filter input{border: 1px solid #dda30a;}
+</style>
+{% endblock %}
+{% block content %}
+<div class="col-sm-12 col-lg-12">
+    <div class="card">
+        <div class="card-header d-flex justify-content-between">
+            <div class="header-title">
+                <h4 class="card-title">Active Sponsor List ({{ userList|length }})</h4>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="datatable" border="1" class="table table-striped iq-table1" data-toggle="data-table">
+                   <thead>
+                      <tr>
+                         <th>SL No.</th>
+                         <th>Name</th>
+                         <th>E-mail</th>
+                         <th>Mobile</th>
+                         <th>Active Amount</th>
+                         <th>Active Date</th>
+                         <th>Joining Date</th>
+                      </tr>
+                   </thead>
+                   <tbody>
+                        {% if userList %}
+                            {% for usr in userList %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ usr.cus_name }} <br/> {{ usr.cus_code }}</td> 
+                                <td>{{ usr.cus_email }}</td>  
+                                <td>{{ usr.cus_mobile_code|add:usr.cus_mobile }}</td>  
+                                <td>USDT {{ usr.package_amount }}</td>                                
+                                <td>{{ usr.purchase_package|date:"d-m-Y H:i:s" }}</td>  
+                                <td>{{ usr.created_at|date:"d-m-Y H:i:s" }}</td>  
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td>No Data Found!</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        {% endif %}
+                   </tbody>
+                   <tfoot>
+                        <tr>
+                            <th>SL No.</th>
+                            <th>Name</th>
+                            <th>E-mail</th>
+                            <th>Mobile</th>
+                            <th>Active Amount</th>
+                            <th>Active Date</th>
+                            <th>Joining Date</th>
+                        </tr>
+                   </tfoot>
+                </table>
+             </div>
+           
+        </div>
+    </div>
+</div>
+<br /><br /><br /><br /><br /><br />
+{% endblock %}
